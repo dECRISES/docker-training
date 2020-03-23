@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Auto delete
-        uses: jessfraz/branch-cleanup-action@master
+        uses: SvanBoxel/delete-merged-branch@master
         env:
           github-token: ${{ secrets.GIT_TOKEN }}
           NO_BRANCH_DELETED_EXIT_CODE: 0
