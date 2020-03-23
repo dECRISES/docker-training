@@ -1,20 +1,15 @@
-# This is a basic workflow to help you get started with Actions
+name: on pull request merge, delete the branch
 
-name: Autodelete
-
-# Controls when the action will run. Triggers the workflow on push or pull request 
-# events but only for the master branch
 on:
   pull_request:
-    types: [closed]
+    branches: [ master ]
 
 jobs:
   delete-branch-after-merge:
     runs-on: ubuntu-latest
     steps:
-      - uses: SvanBoxel/delete-merged-branch@master
-        if: github.event.pull_request.merged == true
+      - uses: jessfraz/branch-cleanup-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_ACTIONS_TOKEN }}
           NO_BRANCH_DELETED_EXIT_CODE: 0
           
