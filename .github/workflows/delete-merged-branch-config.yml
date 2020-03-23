@@ -20,7 +20,7 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Run a one-line script
-      uses: SvanBoxel/delete-merged-branch@master
+      run: SvanBoxel/delete-merged-branch@master
       env:
         github-token: ${{ secrets.GIT_TOKEN }}
         NO_BRANCH_DELETED_EXIT_CODE: 0
