@@ -1,16 +1,27 @@
-name: Auto delete branch on pull request merge
+# This is a basic workflow to help you get started with Actions
 
+name: Autodelete
+
+# Controls when the action will run. Triggers the workflow on push or pull request 
+# events but only for the master branch
 on:
-  pull_request
+  pull_request:
+    branches: [ master ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  autoapprove:
-    name: Auto delete branch on pull request merge
+  # This workflow contains a single job called "build"
+  autoDelete:
+    name: autodelete
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Auto delete
-        uses: SvanBoxel/delete-merged-branch@master
-        env:
-          github-token: ${{ secrets.GIT_TOKEN }}
-          NO_BRANCH_DELETED_EXIT_CODE: 0
+    # Runs a single command using the runners shell
+    - name: Run a one-line script
+      uses: SvanBoxel/delete-merged-branch@master
+      env:
+        github-token: ${{ secrets.GIT_TOKEN }}
+        NO_BRANCH_DELETED_EXIT_CODE: 0
           
