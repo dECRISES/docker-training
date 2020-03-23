@@ -6,23 +6,15 @@ name: Autodelete
 # events but only for the master branch
 on:
   pull_request:
-    branches: [ master ]
+    types: [closed]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  autoDelete:
-    name: autodelete
-    # The type of runner that the job will run on
+  delete-branch-after-merge:
     runs-on: ubuntu-latest
-    
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      uses: SvanBoxel/delete-merged-branch@master
-      env:
-        github-token: ${{ secrets.GIT_TOKEN }}
-        NO_BRANCH_DELETED_EXIT_CODE: 0
+      - uses: SvanBoxel/delete-merged-branch@master
+        if: github.event.pull_request.merged == true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NO_BRANCH_DELETED_EXIT_CODE: 0
           
