@@ -1,5 +1,16 @@
-exclude:
-  - development
-  - qa
-  - feature-*
-delete_closed_pr: true
+name: Auto delete branch on pull request merge
+
+on:
+  pull_request
+
+jobs:
+  autoapprove:
+    name: Auto delete branch on pull request merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto delete
+        uses: jessfraz/branch-cleanup-action@master
+        env:
+          github-token: ${{ secrets.GIT_TOKEN }}
+          NO_BRANCH_DELETED_EXIT_CODE: 0
+          
